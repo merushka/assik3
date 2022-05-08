@@ -47,5 +47,57 @@ public class MyHashTable <K, V>{
         index *= -1;
         return index;
     }
+    public void put(K key, V val){
+        int index = getIndex(key);
+        int hash = hash(key);
 
+        HashNode<K, V> head = chainArray.get(index);
+
+        while(head != null){
+            if (head.key.equals(key) && head.hashCode == hash){
+                head.val = val;
+                return;
+            }
+            head = head.next;
+        }
+        size++;
+        head = chainArray.get(index);
+        HashNode<K, V> newNode = new HashNode<>(key, val, hash);
+        newNode.next = head;
+        chainArray.set(index, newNode);
+
+        if ( (double) (M / size) > 0.6){
+            System.out.println("LOAD FACTOR " + key + " " + val);
+            M *= 2;
+            ArrayList<HashNode<K, V>> oldList = chainArray;
+            chainArray = new ArrayList<>();
+            size = 0;
+            for (int i = 0; i < M; i ++){
+                chainArray.add(null);
+            }
+            int i;
+            for (i = 0; i < oldList.size(); i++){
+                HashNode<K, V> start = oldList.get(i);
+                while(start != null){
+                    put(start.key, start.val);
+                    start = start.next;
+                }
+            }
+        }
+
+    }
+
+    public void print(){
+        int i;
+        for (i = 0; i < M; i ++){
+            HashNode<K, V> head = chainArray.get(i);
+            if (head != null){
+                while(head != null){
+                    System.out.print("{" + head.key + "," + head.val + "}  ");
+                    head = head.next;
+                }
+                System.out.println();
+            }
+        }
+    }
 
