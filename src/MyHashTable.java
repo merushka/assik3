@@ -101,3 +101,41 @@ public class MyHashTable <K, V>{
         }
     }
 
+
+    public V get(K key){
+        int index;
+        index = getIndex(key);
+        int hash;
+        hash = hash(key);
+        HashNode<K, V> head = chainArray.get(index);
+
+        while(head != null){
+            if (head.key.equals(key) && head.hashCode == hash){
+                return head.val;
+            }
+            head = head.next;
+        }
+        return null;
+    }
+
+    public V remove(K key){
+        int index;
+        index = getIndex(key);
+        int hash;
+        hash = hash(key);
+        HashNode<K, V> head = chainArray.get(index);
+        HashNode<K, V> prev = null;
+        while(head != null){
+            if (head.key.equals(key) && hash == head.hashCode) break;
+            prev = head;
+            head = head.next;
+        }
+        if (head == null) return null;
+
+        size--;
+
+        if(prev != null) prev.next = head.next;
+        else chainArray.set(index, head.next);
+        return head.val;
+    }
+
