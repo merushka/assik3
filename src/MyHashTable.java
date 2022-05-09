@@ -138,4 +138,25 @@ public class MyHashTable <K, V>{
         else chainArray.set(index, head.next);
         return head.val;
     }
+    public boolean contains(V value){
+        for (int i = 0; i < M; i ++){
+            if (chainArray.get(i) != null){
+                HashNode<K, V> head = chainArray.get(i);
+                while(head != null){
+                    if(head.val.equals(value)){
+                        return true;
+                    }
+                    head = head.next;
+                }
+            }
+        }
+        return false;
+    }
+    public K getKey(V val){
+        return null;
+    }
+    public int size(){
+        return size;
+    }
+}
 
