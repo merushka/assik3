@@ -95,3 +95,18 @@ public class BST <K extends Comparable<K>, V> {
             } else if (root.right == null) {
                 return root.left;
             }
+
+            root.key = minNode(root.right);
+            root.right = delete(root.right, root.key);
+        }
+        return root;
+    }
+
+    private K minNode(Node root) {
+        K mn = root.key;
+        while (root.left != null) {
+            mn = root.left.key;
+            root = root.left;
+        }
+        return mn;
+    }
