@@ -101,7 +101,6 @@ public class BST <K extends Comparable<K>, V> {
         }
         return root;
     }
-
     private K minNode(Node root) {
         K mn = root.key;
         while (root.left != null) {
@@ -109,4 +108,11 @@ public class BST <K extends Comparable<K>, V> {
             root = root.left;
         }
         return mn;
+    }
+    public K secondMin() {
+        return secondMin(root);
+    }
+    public K secondMin(Node root) {
+        //TODO
+        return null;
     }
