@@ -116,3 +116,30 @@ public class BST <K extends Comparable<K>, V> {
         //TODO
         return null;
     }
+    public Iterable<K> iterator() {
+        //TODO
+        return null;
+    }
+
+    private class BSTIterator implements Iterator<K> {
+
+        public BSTIterator() {
+
+        }
+
+        @Override
+        public boolean hasNext() {
+            return false;
+        }
+
+        @Override
+        public K next() {
+            return null;
+        }
+
+        @Override
+        public void remove() {
+            Iterator.super.remove();
+        }
+    }
+}
